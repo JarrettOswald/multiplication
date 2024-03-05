@@ -1,6 +1,7 @@
 HELP.md
 target/
 challenges-frontend/node_modules/
+qodana.yaml
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
