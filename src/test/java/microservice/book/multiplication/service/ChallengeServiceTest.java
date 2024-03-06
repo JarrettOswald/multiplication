@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -36,11 +37,11 @@ class ChallengeServiceTest {
                 userRepository,
                 attemptRepository
         );
-        given(attemptRepository.save(any())).will(returnsFirstArg());
     }
 
     @Test
     void checkCorrectAttemptTest() {
+        given(attemptRepository.save(any())).will(returnsFirstArg());
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "john_doe", 3000);
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
         then(resultAttempt.isCorrect()).isTrue();
@@ -51,6 +52,7 @@ class ChallengeServiceTest {
 
     @Test
     void checkExistingUserTest() {
+        given(attemptRepository.save(any())).will(returnsFirstArg());
         User existUser = new User(1L, "john_doe");
         given(userRepository.findByAlias("john_doe")).willReturn(Optional.of(existUser));
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "john_doe", 5000);
@@ -61,5 +63,17 @@ class ChallengeServiceTest {
         then(resultAttempt.getUser()).isEqualTo(existUser);
         verify(userRepository, never()).save(any());
         verify(attemptRepository).save(resultAttempt);
+    }
+
+    @Test
+    void checkLastAttempt() {
+        List<ChallengeAttempt> attemptList = List.of(
+                new ChallengeAttempt(1L, new User("john_doe"), 50, 50, 2000, false),
+                new ChallengeAttempt(2L, new User("john_doe"), 50, 51, 2050, false),
+                new ChallengeAttempt(3L, new User("john_doe"), 50, 50, 2500, true)
+        );
+        given(attemptRepository.lastAttempts("john_doe")).willReturn(attemptList);
+        List<ChallengeAttempt> resultAttempt = challengeService.getLastAttempt("john_doe");
+        then(attemptList).isEqualTo(resultAttempt);
     }
 }

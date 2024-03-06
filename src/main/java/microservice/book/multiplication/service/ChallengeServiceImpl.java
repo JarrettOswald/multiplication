@@ -10,6 +10,8 @@ import microservice.book.multiplication.repository.ChallengeAttemptRepository;
 import microservice.book.multiplication.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -35,5 +37,10 @@ public class ChallengeServiceImpl implements ChallengeService {
                 isCorrect);
 
         return attemptRepository.save(checkedAttempt);
+    }
+
+    @Override
+    public List<ChallengeAttempt> getLastAttempt(String alias) {
+        return attemptRepository.lastAttempts(alias);
     }
 }
