@@ -1,6 +1,8 @@
 HELP.md
 target/
 challenges-frontend/node_modules/
+multiplication.mv.db
+multiplication.trace.db
 qodana.yaml
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

@@ -16,7 +16,7 @@ public class ChallengeAttempt {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "CHALLENGE_USER_ID")
     private ChallengeUser challengeUser;
 
