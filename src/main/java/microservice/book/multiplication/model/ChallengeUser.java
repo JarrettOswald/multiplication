@@ -19,7 +19,7 @@ public class User {
 
     private String alias;
 
-    public User(String alias) {
-        this(null, alias);
+    public User(final String userAlias) {
+        this(null, userAlias);
     }
 }
