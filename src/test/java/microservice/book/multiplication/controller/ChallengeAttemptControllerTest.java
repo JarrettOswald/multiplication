@@ -48,7 +48,7 @@ class ChallengeAttemptControllerTest {
 
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 70, "john", 3500);
         ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, user, 50, 70, 3500, true);
-        given(challengeService.verifyAttempt(eq(attemptDTO))).willReturn(expectedResponse);
+        given(challengeService.verifyAttempt(attemptDTO)).willReturn(expectedResponse);
 
         MockHttpServletResponse response = mvc.perform(
                         post("/attempts")
