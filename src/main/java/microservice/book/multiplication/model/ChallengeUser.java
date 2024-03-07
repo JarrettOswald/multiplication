@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class ChallengeUser {
 
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ public class User {
 
     private String alias;
 
-    public User(final String userAlias) {
+    public ChallengeUser(final String userAlias) {
         this(null, userAlias);
     }
 }
