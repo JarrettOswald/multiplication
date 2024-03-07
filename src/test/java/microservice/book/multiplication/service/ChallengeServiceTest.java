@@ -2,7 +2,7 @@ package microservice.book.multiplication.service;
 
 import microservice.book.multiplication.model.ChallengeAttempt;
 import microservice.book.multiplication.model.ChallengeAttemptDTO;
-import microservice.book.multiplication.model.User;
+import microservice.book.multiplication.model.ChallengeUser;
 import microservice.book.multiplication.repository.ChallengeAttemptRepository;
 import microservice.book.multiplication.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,14 +46,14 @@ class ChallengeServiceTest {
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
         then(resultAttempt.isCorrect()).isTrue();
 
-        verify(userRepository).save(new User("john_doe"));
+        verify(userRepository).save(new ChallengeUser("john_doe"));
         verify(attemptRepository).save(resultAttempt);
     }
 
     @Test
     void checkExistingUserTest() {
         given(attemptRepository.save(any())).will(returnsFirstArg());
-        User existUser = new User(1L, "john_doe");
+        ChallengeUser existUser = new ChallengeUser(1L, "john_doe");
         given(userRepository.findByAlias("john_doe")).willReturn(Optional.of(existUser));
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "john_doe", 5000);
 
@@ -68,11 +68,11 @@ class ChallengeServiceTest {
     @Test
     void checkLastAttempt() {
         List<ChallengeAttempt> attemptList = List.of(
-                new ChallengeAttempt(1L, new User("john_doe"), 50, 50, 2000, false),
-                new ChallengeAttempt(2L, new User("john_doe"), 50, 51, 2050, false),
-                new ChallengeAttempt(3L, new User("john_doe"), 50, 50, 2500, true)
+                new ChallengeAttempt(1L, new ChallengeUser("john_doe"), 50, 50, 2000, false),
+                new ChallengeAttempt(2L, new ChallengeUser("john_doe"), 50, 51, 2050, false),
+                new ChallengeAttempt(3L, new ChallengeUser("john_doe"), 50, 50, 2500, true)
         );
-        given(attemptRepository.lastAttempts("john_doe")).willReturn(attemptList);
+        given(attemptRepository.findTop10ByUserAliasOrderByIdDesc("john_doe")).willReturn(attemptList);
         List<ChallengeAttempt> resultAttempt = challengeService.getLastAttempt("john_doe");
         then(attemptList).isEqualTo(resultAttempt);
     }

@@ -3,7 +3,7 @@ package microservice.book.multiplication.controller;
 import microservice.book.multiplication.model.ChallengeAttempt;
 import microservice.book.multiplication.model.ChallengeAttemptDTO;
 import microservice.book.multiplication.service.ChallengeService;
-import microservice.book.multiplication.model.User;
+import microservice.book.multiplication.model.ChallengeUser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ class ChallengeAttemptControllerTest {
 
     @Test
     void postValidResult() throws Exception {
-        User user = new User(1L, "john");
+        ChallengeUser user = new ChallengeUser(1L, "john");
         long attemptId = 5L;
 
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 70, "john", 3500);
