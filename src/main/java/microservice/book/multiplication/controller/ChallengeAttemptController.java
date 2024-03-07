@@ -25,7 +25,7 @@ public class ChallengeAttemptController {
     }
 
     @GetMapping
-    ResponseEntity<List<ChallengeAttempt>> getLastAttempt(@RequestParam("alias") String alias) {
-        return ResponseEntity.ok(challengeService.getLastAttempt(alias));
+    ResponseEntity<List<ChallengeAttempt>> getStatsForUser(@RequestParam("alias") String alias) {
+        return ResponseEntity.ok(challengeService.getStatsForUser(alias));
     }
 }

@@ -72,8 +72,8 @@ class ChallengeServiceTest {
                 new ChallengeAttempt(2L, new ChallengeUser("john_doe"), 50, 51, 2050, false),
                 new ChallengeAttempt(3L, new ChallengeUser("john_doe"), 50, 50, 2500, true)
         );
-        given(attemptRepository.findTop10ByUserAliasOrderByIdDesc("john_doe")).willReturn(attemptList);
-        List<ChallengeAttempt> resultAttempt = challengeService.getLastAttempt("john_doe");
+        given(attemptRepository.findTop10ByChallengeUserAliasOrderByIdDesc("john_doe")).willReturn(attemptList);
+        List<ChallengeAttempt> resultAttempt = challengeService.getStatsForUser("john_doe");
         then(attemptList).isEqualTo(resultAttempt);
     }
 }

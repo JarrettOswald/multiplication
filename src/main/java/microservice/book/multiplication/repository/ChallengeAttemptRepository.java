@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ChallengeAttemptRepository extends CrudRepository<ChallengeAttempt, Long> {
 
-    List<ChallengeAttempt> findTop10ByUserAliasOrderByIdDesc(String userAlias);
+    List<ChallengeAttempt> findTop10ByChallengeUserAliasOrderByIdDesc(String userAlias);
 }

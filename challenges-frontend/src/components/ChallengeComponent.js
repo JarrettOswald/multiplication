@@ -7,7 +7,7 @@ class ChallengeComponent extends React.Component {
         super(props);
         this.state = {
             a: '', b: '',
-            user: '',
+            ChallengeChallengeUser: '',
             message: '',
             guess: 0
         };
@@ -41,7 +41,7 @@ class ChallengeComponent extends React.Component {
 
     handleSubmitResult(event) {
         event.preventDefault();
-        ApiClient.sendGuess(this.state.user,
+        ApiClient.sendGuess(this.state.ChallengeUser,
             this.state.a, this.state.b,
             this.state.guess)
             .then(res => {
@@ -79,8 +79,8 @@ class ChallengeComponent extends React.Component {
                     <label>
                         Your alias:
                         <input type="text" maxLength="12"
-                               name="user"
-                               value={this.state.user}
+                               name="ChallengeUser"
+                               value={this.state.ChallengeUser}
                                onChange={this.handleChange}/>
                     </label>
                     <br/>
