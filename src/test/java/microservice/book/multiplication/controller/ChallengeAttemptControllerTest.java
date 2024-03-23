@@ -2,8 +2,8 @@ package microservice.book.multiplication.controller;
 
 import microservice.book.multiplication.model.ChallengeAttempt;
 import microservice.book.multiplication.model.ChallengeAttemptDTO;
-import microservice.book.multiplication.service.ChallengeService;
 import microservice.book.multiplication.model.ChallengeUser;
+import microservice.book.multiplication.service.ChallengeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -28,7 +26,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ChallengeAttemptController.class)
 class ChallengeAttemptControllerTest {
-
     @MockBean
     private ChallengeService challengeService;
 
