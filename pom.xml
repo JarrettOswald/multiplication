@@ -10,7 +10,7 @@
     </parent>
     <groupId>microservice.book</groupId>
     <artifactId>multiplication</artifactId>
-    <version>24.03.01</version>
+    <version>24.03.02</version>
     <name>multiplication</name>
     <description>Multiplication Application</description>
 
@@ -72,6 +72,12 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>3.4.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
@@ -117,5 +123,4 @@
 
         </plugins>
     </build>
-
 </project>

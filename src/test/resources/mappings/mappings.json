@@ -1,0 +1,42 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/attempts",
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$[?(@.attemptId == '1')]"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "body": "Ok",
+        "headers": {
+          "Content-Type": "application/json",
+          "Connection": "close"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/attempts",
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$[?(@.attemptId == '2')]"
+          }
+        ]
+      },
+      "response": {
+        "status": 500,
+        "body": "server error",
+        "headers": {
+          "Content-Type": "application/json",
+          "Connection": "close"
+        }
+      }
+    }
+  ]
+}

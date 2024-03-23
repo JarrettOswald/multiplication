@@ -12,3 +12,7 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+
+endpoint:
+  gamification-service:
+    url: ${GAMIFICATION_SERVICE_URL:http://localhost:8081}
