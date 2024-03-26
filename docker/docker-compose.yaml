@@ -1,8 +1,7 @@
 version: "3.9"
 services:
-  database:
+  database-multiplication:
     image: postgres
-    container_name: postgres-multiplication
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
