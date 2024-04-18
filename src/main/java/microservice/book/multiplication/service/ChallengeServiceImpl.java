@@ -3,7 +3,6 @@ package microservice.book.multiplication.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import microservice.book.multiplication.client.gamification.GamificationServiceClient;
 import microservice.book.multiplication.model.ChallengeAttempt;
 import microservice.book.multiplication.model.ChallengeAttemptDTO;
 import microservice.book.multiplication.model.ChallengeUser;
@@ -20,7 +19,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     private final UserRepository userRepository;
     private final ChallengeAttemptRepository attemptRepository;
-    private final GamificationServiceClient gameClient;
+    private final ChallengeEventPub challengeEventPub;
 
     @Override
     public ChallengeAttempt verifyAttempt(ChallengeAttemptDTO attemptDTO) {
@@ -38,10 +37,7 @@ public class ChallengeServiceImpl implements ChallengeService {
                 attemptDTO.getGuess(),
                 isCorrect);
         ChallengeAttempt storedAttempt = attemptRepository.save(checkedAttempt);
-
-        boolean status = gameClient.sendAttempt(storedAttempt);
-        log.info("Gamification service status: {}", status);
-
+        challengeEventPub.challengeSolved(storedAttempt);
         return storedAttempt;
     }
 

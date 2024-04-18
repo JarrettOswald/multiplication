@@ -3,7 +3,7 @@ package microservice.book.multiplication.model;
 import lombok.Value;
 
 @Value
-public class ChallengeSlavedDTO {
+public class ChallengeSolvedEvent {
 
     long attemptId;
     boolean correct;

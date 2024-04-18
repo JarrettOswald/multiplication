@@ -1,6 +1,5 @@
 package microservice.book.multiplication.service;
 
-import microservice.book.multiplication.client.gamification.GamificationServiceClient;
 import microservice.book.multiplication.model.ChallengeAttempt;
 import microservice.book.multiplication.model.ChallengeAttemptDTO;
 import microservice.book.multiplication.model.ChallengeUser;
@@ -33,14 +32,14 @@ class ChallengeServiceTest {
     private ChallengeAttemptRepository attemptRepository;
 
     @Mock
-    private GamificationServiceClient gamificationServiceClient;
+    private ChallengeEventPub challengeEventPub;
 
     @BeforeEach
     public void setUp() {
         challengeService = new ChallengeServiceImpl(
                 userRepository,
                 attemptRepository,
-                gamificationServiceClient
+                challengeEventPub
         );
     }
 
@@ -53,6 +52,7 @@ class ChallengeServiceTest {
 
         verify(userRepository).save(new ChallengeUser("john_doe"));
         verify(attemptRepository).save(resultAttempt);
+        verify(challengeEventPub).challengeSolved(resultAttempt);
     }
 
     @Test

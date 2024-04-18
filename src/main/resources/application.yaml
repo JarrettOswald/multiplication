@@ -13,6 +13,20 @@ server:
     include-message: always
     include-binding-errors: always
 
+amqp:
+  exchange:
+    attempts: attempts.topic
+
 endpoint:
   gamification-service:
     url: ${GAMIFICATION_SERVICE_URL:http://localhost:8081}
+
+
+logging:
+  level:
+    org:
+      springframework:
+        amqp:
+          rabbit:
+            core:
+              RabbitAdmin: DEBUG
