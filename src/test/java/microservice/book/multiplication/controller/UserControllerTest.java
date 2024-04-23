@@ -1,4 +1,4 @@
-package microservice.book.multiplication;
+package microservice.book.multiplication.controller;
 
 import microservice.book.multiplication.model.ChallengeUser;
 import microservice.book.multiplication.repository.UserRepository;
@@ -13,11 +13,13 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class UserControllerTest {
+
     @Autowired
     private UserController challengeController;
 
@@ -35,9 +37,21 @@ class UserControllerTest {
 
         given(userRepository.findAllByIdIn(List.of(1L))).willReturn(List.of(user));
 
-        mockMvc.perform(get("/user/1"))
+        mockMvc.perform(get("/users/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$..id").value(1))
                 .andExpect(jsonPath("$..alias").value("Test"));
+    }
+
+    @Test
+    void getUsersByIdsList() throws Exception {
+        var user = new ChallengeUser();
+        user.setId(1L);
+        user.setAlias("Test");
+
+        given(userRepository.findAllByIdIn(List.of(1L))).willReturn(List.of(user));
+
+        mockMvc.perform(get("/users/1,2,3"))
+                .andExpect(status().isOk());
     }
 }
