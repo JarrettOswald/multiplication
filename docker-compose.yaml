@@ -19,13 +19,6 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: don
       RABBITMQ_DEFAULT_PASS: don
-  app-multiplication:
-    image: openjdk:11
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
 
 volumes:
   rabbitmq_data:
