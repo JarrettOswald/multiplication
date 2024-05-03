@@ -7,6 +7,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  cloud:
+    consul:
+      host: 192.168.0.109
+  application:
+    name: multiplication
 
 server:
   error:
@@ -20,7 +25,6 @@ amqp:
 endpoint:
   gamification-service:
     url: ${GAMIFICATION_SERVICE_URL:http://localhost:8081}
-
 
 logging:
   level:
