@@ -20,6 +20,7 @@ public class UserController {
 
     @GetMapping("/{idList}")
     public List<ChallengeUser> getUserByIdList(@PathVariable final List<Long> idList) {
+        log.info("Resolving aliases for users {}", idList);
         return userRepository.findAllByIdIn(idList);
     }
 }

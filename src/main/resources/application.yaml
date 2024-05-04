@@ -24,7 +24,7 @@ amqp:
 
 endpoint:
   gamification-service:
-    url: ${GAMIFICATION_SERVICE_URL:http://localhost:8081}
+    url: ${GAMIFICATION_SERVICE_URL:http://gamification/attempts}
 
 logging:
   level:
